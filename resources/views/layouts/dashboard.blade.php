@@ -12,8 +12,8 @@
     <title>@yield('title')</title>
 
     @stack('prepend-style')
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-        <link href="{{ url('style/main.css') }}" rel="stylesheet" />
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+      <link href="{{ url('style/main.css') }}" rel="stylesheet" />
     @stack('addon-style')
   </head>
 
@@ -27,7 +27,7 @@
         <div class="list-group list-group-flush">
           <a
             href="/dashboard.html"
-            class="list-group-item list-group-item-action active"
+            class="list-group-item list-group-item-action"
           >
             Dashboard
           </a>
@@ -94,7 +94,7 @@
                     data-toggle="dropdown"
                   >
                     <img
-                      src="images/icon-user.png"
+                      src="{{ url('images/icon-user.png') }}"
                       alt=""
                       class="rounded-circle mr-2 profile-picture"
                     />
@@ -112,7 +112,7 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link d-inline-block mt-2">
-                    <img src="images/icon-cart-filled.svg" alt="" />
+                    <img src="{{ url('images/icon-cart-filled.svg') }}" alt="" />
                     <div class="card-badge">3</div>
                   </a>
                 </li>
