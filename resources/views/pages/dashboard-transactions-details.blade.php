@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-  Store Dashboard Transaction Detail
+  Store Dashboard Transaction Detail    
 @endsection
 
 @section('content')
@@ -96,14 +96,13 @@
                                         <div class="product-subtitle">Indonesia</div>
                                     </div>
                                     <div class="col-12 col-md-3">
-                                        <div class="product-title">Status</div>
+                                        <div class="product-title">Shipping Status</div>
                                         <select
                                         name="status"
                                         id="status"
                                         class="form-control"
                                         v-model="status"
                                         >
-                                        <option value="UNPAID">Unpaid</option>
                                         <option value="PENDING">Pending</option>
                                         <option value="SHIPPING">Shipping</option>
                                         <option value="SUCCESS">Success</option>
