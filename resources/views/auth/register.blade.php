@@ -1,8 +1,7 @@
-@extends('layouts.auth')                                                                                                                                                                                                                                                         
-
+@extends('layouts.auth')                                                                                                                                                                                                                   
 @section('content')
 
- <div class="page-content page-auth" id="register">
+<div class="page-content page-auth" id="register">
     <div class="section-store-auth" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center justify-content-center row-login">

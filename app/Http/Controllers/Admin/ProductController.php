@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Requests\Admin\ProductRequest;
+use App\Models\Category;
+use App\Models\User;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +22,7 @@ class CategoryController extends Controller
     {
         if(request()->ajax())
         {
-            $query = Category::query();
+            $query = Product::with(['user', 'category']);
 
             return DataTables::of($query)
                 ->addColumn('action', function($item) {
@@ -31,10 +33,10 @@ class CategoryController extends Controller
                                     Aksi
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="' . route('category.edit', $item->id). '">
+                                    <a class="dropdown-item" href="' . route('product.edit', $item->id). '">
                                         Sunting
                                     </a>
-                                    <form action="'. route('category.destroy', $item->id) .'" method="POST">
+                                    <form action="'. route('product.destroy', $item->id) .'" method="POST">
                                         '. method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -45,20 +47,16 @@ class CategoryController extends Controller
                         </div>
                     ';
                 })
-                ->editColumn('photo', function($item){
-                    return $item->photo ? '<img src="'. asset('storage/'.$item->photo) .'" style="max-height: 40px;"/>' : '';
-                })
-
                 ->addColumn('no', function($item) {
                     static $count = 1;
                     return $count++;
                 })
                
-                ->rawColumns(['action', 'photo', 'no'])
+                ->rawColumns(['action', 'no'])
                 ->make();
 
         }
-        return view('pages.admin.category.index');
+        return view('pages.admin.product.index');
     }
 
     /**
@@ -66,22 +64,27 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.category.create');
+        $users = User::all();
+        $categories = Category::all();
+
+        return view('pages.admin.product.create',[
+            'users' => $users,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(ProductRequest $request)
     {
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
 
-        Category::create($data);
+        Product::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -97,9 +100,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $item = Category::findOrFail($id);
+        $item = Product::findOrFail($id);
 
-        return view('pages.admin.category.edit',[
+        return view('pages.admin.product.edit',[
             'item' => $item
         ]);
     }
@@ -107,18 +110,18 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['photo'] = $request->file('photo')->store('assets/product', 'public');
 
-        $item = Category::findOrFail($id);
+        $item = Product::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('product.index');
         
     }
 
@@ -127,9 +130,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = Category::findOrFail($id);
+        $item = Product::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('product.index');
     }
 }

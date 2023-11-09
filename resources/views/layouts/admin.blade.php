@@ -33,8 +33,8 @@
             Dashboard
           </a>
           <a
-            href="{{ route('category.index') }}"
-            class="list-group-item list-group-item-action"
+            href="{{ route('product.index') }}"
+            class="list-group-item list-group-item-action {{ (request()->is('admin/product*')) ? 'active' : '' }}"
           >
             Products
           </a>
@@ -51,8 +51,8 @@
             Transactions
           </a>
           <a
-            href="/dashboard-settings.html"
-            class="list-group-item list-group-item-action"
+            href="{{ route('user.index') }}"
+            class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active' : '' }}"
           >
             Users
           </a>

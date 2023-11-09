@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +48,6 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('admin-dashboard');
         Route::resource('category', CategoryController::class);
+        Route::resource('user', UserController::class);
+        Route::resource('product', ProductController::class);
     });
