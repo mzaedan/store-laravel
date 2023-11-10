@@ -101,8 +101,12 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $item = Product::findOrFail($id);
+        $users = User::all();
+        $categories = Category::all();
 
         return view('pages.admin.product.edit',[
+            'users' => $users,
+            'categories' => $categories,
             'item' => $item
         ]);
     }
@@ -114,10 +118,8 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/product', 'public');
-
         $item = Product::findOrFail($id);
+        $data['slug'] = Str::slug($request->name);
 
         $item->update($data);
 

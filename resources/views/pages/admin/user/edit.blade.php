@@ -1,18 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-  Edit Category
+  Create User
 @endsection
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 @section('content')
 
 <div class="section-content section-dashboard-home" data-aos="fade-up">
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">Category</h2>
-            <p class="dashboard-subtitle">Edit Category</p>
+            <h2 class="dashboard-title">User</h2>
+            <p class="dashboard-subtitle">Create New User</p>
         </div>
         <div class="dashboard-content">
             <div class="row">
@@ -28,20 +26,37 @@
                     @endif
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('category.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('user.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Nama Kategori</label>
-                                            <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
+                                            <label>Nama User</label>
+                                            <input type="text" name="name" class="form-control" required value="{{ $item->name }}">
                                         </div>
                                     </div>
-                                   <div class="col-md-12">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="photo">Photo</label>
-                                            <input type="file" name="photo" class="form-control" value="{{ old('photo', asset('storage/'.$item->photo)) }}">
+                                            <label>Email User</label>
+                                            <input type="email" name="email" class="form-control" required value="{{ $item->email }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" name="password" class="form-control">
+                                            <small>Kosongkan Jika Tidak Akan Ganti Password</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Roles</label>
+                                            <select name="roles" class="form-control" required>
+                                                <option value="{{ $item->roles }}" selected>Tidak Diganti</option>
+                                                <option value="ADMIN">ADMIN</option>
+                                                <option value="USER">USER</option>  
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
