@@ -1,3 +1,5 @@
+2023_10_20_013829_create_product_galleries_table
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('photos');
             $table->integer('products_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
