@@ -62,8 +62,8 @@
           >
             Users
           </a>
-          <a href="/index.html" class="list-group-item list-group-item-action">
-            Sign Out
+          <a href="{{ route('logout') }}" class="list-group-item list-group-item-action">
+            Logout
           </a>
         </div>
       </div>
