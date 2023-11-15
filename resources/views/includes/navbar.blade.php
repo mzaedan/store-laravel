@@ -4,7 +4,7 @@
     >
       <div class="container">
         <a href="{{ route('home') }}" class="navbar-brand">
-          <img src="images/logo.svg" alt="" />
+          <img src="{{ url('images/logo.svg') }}" alt="" />
         </a>
         <button
           class="navbar-toggler"
@@ -51,7 +51,7 @@
                   data-toggle="dropdown"
                 >
                   <img
-                    src="images/icon-user.png"
+                    src="{{ url('images/icon-user.png') }}"
                     alt=""
                     class="rounded-circle mr-2 profile-picture"
                   />

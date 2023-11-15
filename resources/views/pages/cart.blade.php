@@ -42,66 +42,34 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td style="width: 20%">
-                      <img
-                        src="images/product-cart-1.jpg"
-                        alt=""
-                        class="cart-image"
-                      />
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">Sofa Ternyaman</div>
-                      <div class="product-subtitle">By Andi Sukka</div>
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">$29,112</div>
-                      <div class="product-subtitle">USD</div>
-                    </td>
-                    <td style="width: 20%">
-                      <a href="#" class="btn btn-remove-cart"> Remove </a>
-                    </td>
+                  @foreach ($carts as $cart)
+                    <tr>
+                      <td style="width: 20%">
+                        @if($cart->product->galleries)
+                          <img
+                            src="{{ asset('storage/' .$cart->product->galleries->first()->photos) }}"
+                            alt=""
+                            class="cart-image"
+                          />
+                        @endif
+                      </td>
+                      <td style="width: 35%">
+                        <div class="product-title">{{ $cart->product->name }}</div>
+                        <div class="product-subtitle">By {{ $cart->product->user->store_name }}</div>
+                      </td>
+                      <td style="width: 35%">
+                        <div class="product-title">${{ number_format($cart->product->price) }}</div>
+                        <div class="product-subtitle">USD</div>
+                      </td>
+                      <td style="width: 20%">
+                        <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="btn btn-remove-cart"> Remove </button>
+                        </form>
+                      </td>
                   </tr>
-                  <tr>
-                    <td style="width: 20%">
-                      <img
-                        src="images/product-cart-2.jpg"
-                        alt=""
-                        class="cart-image"
-                      />
-                    </td>
-                    <td style="width: 30%">
-                      <div class="product-title">Sneaker</div>
-                      <div class="product-subtitle">By Muhamad Zaedan</div>
-                    </td>
-                    <td style="width: 20%">
-                      <div class="product-title">$80,309</div>
-                      <div class="product-subtitle">USD</div>
-                    </td>
-                    <td style="width: 25%">
-                      <a href="#" class="btn btn-remove-cart">Remove</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%">
-                      <img
-                        src="images/product-cart-3.jpg"
-                        alt=""
-                        class="cart-image"
-                      />
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">Coffee Holder</div>
-                      <div class="product-subtitle">By Zidan</div>
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">$29,112</div>
-                      <div class="product-subtitle">USD</div>
-                    </td>
-                    <td style="width: 25%">
-                      <a href="#" class="btn btn-remove-cart">Remove</a>
-                    </td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
