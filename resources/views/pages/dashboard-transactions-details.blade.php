@@ -9,7 +9,7 @@
 <div class="section-content section-dashboard-home" data-aos="fade-up">
     <div class="container-fluid">
         <div class="dashboard-heading">
-            <h2 class="dashboard-title">#STORE0839</h2>
+            <h2 class="dashboard-title">{{ $transaction->code }}</h2>
             <p class="dashboard-subtitle">Transactions Details</p>
         </div>
 
@@ -21,7 +21,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-4">
                                     <img
-                                    src="images/product-details-dashboard.png"
+                                    src="{{ asset('storage/'.$transaction->product->galleries->first()->photos ?? '') }}"
                                     alt=""
                                     class="w-100 mb-3"
                                     />
@@ -30,34 +30,34 @@
                                     <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">Custumer Name</div>
-                                        <div class="product-subtitle">Muhamad Zaedan</div>
+                                        <div class="product-subtitle">{{ $transaction->transaction->user->name }}</div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">Product Name</div>
-                                        <div class="product-subtitle">Gelas</div>
+                                        <div class="product-subtitle">{{ $transaction->product->name }}</div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">
                                         Date of Transaction
                                         </div>
                                         <div class="product-subtitle">
-                                        12 Januari, 2023
+                                        {{ $transaction->created_at }}
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">Payment Status</div>
                                         <div class="product-subtitle text-success">
-                                        Success
+                                        {{ $transaction->transaction->transaction_status }}
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">Total Amount</div>
-                                        <div class="product-subtitle">$280,409</div>
+                                        <div class="product-subtitle">{{ number_format($transaction->transaction->total_price) }}</div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="product-title">Mobile</div>
                                         <div class="product-subtitle">
-                                        +628 2020 11111
+                                        {{ $transaction->user->phone }}
                                         </div>
                                     </div>
                                     </div>

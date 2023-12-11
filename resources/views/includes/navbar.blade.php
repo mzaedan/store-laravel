@@ -78,10 +78,10 @@
                     $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
                   @endphp
                   @if ($carts > 0)
-                    <img src="images/icon-cart-filled.svg" alt="" />
+                    <img src="{{ url('images/icon-cart-filled.svg') }}" alt="" />
                     <div class="card-badge">{{ $carts }}</div>
                   @else
-                    <img src="images/icon-cart-empty.svg" alt="" />
+                    <img src="{{ url('images/icon-cart-empty.svg') }}" alt="" />
                   @endif
                 </a>
               </li>
