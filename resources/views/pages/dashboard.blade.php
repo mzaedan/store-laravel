@@ -50,7 +50,7 @@
                     <h5 class="mb-3">Recent Transaction</h5>
                     @foreach ($transaction_data as $transaction)
                         <a
-                            href="{{ route('dashboard-transaction-details') }}"
+                            href="{{ route('dashboard-transaction-details', $transaction->id) }}"
                             class="card card-list d-block"
                         >
                         <div class="card-body">
@@ -59,7 +59,7 @@
                                     <img
                                     src="{{ asset('storage/'.$transaction->product->galleries->first()->photos ?? '') }}"
                                     class="w-75"
-                                    />
+                                        />
                                 </div>
                                 <div class="col-md-4">{{ $transaction->product->name ?? '' }}</div>
                                 <div class="col-md-3">{{ $transaction->user->name ?? '' }}</div>

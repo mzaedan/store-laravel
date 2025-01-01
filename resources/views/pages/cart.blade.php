@@ -232,7 +232,7 @@
           axios.get('{{ route('api-provinces') }}')
             .then(function(response){
               self.provinces = response.data;
-            })
+            })  
 
         },
         getRegenciesData(){
